@@ -149,6 +149,6 @@ void main() {
 	printOutcome(head);
 
 
-	cout << endl;
+	
 	system("pause");
 }
