@@ -111,7 +111,9 @@ void printOutcome(node a)
 	cout << "NULL \n";
 }
 
-
+string saySomething() {
+	return "Your mom gay";
+}
 
 void main() {
 	/*node a, b, c;
@@ -145,6 +147,8 @@ void main() {
 	cout << "Nhap gia tri can them: ";
 	cin >> valueAdding;
 	insertAfterSpecificNode(head, valueAdding, search);
+
+	cout << saySomething;
 
 	printOutcome(head);
 
