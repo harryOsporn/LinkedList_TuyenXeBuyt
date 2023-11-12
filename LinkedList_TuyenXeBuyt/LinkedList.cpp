@@ -8,7 +8,7 @@ public:
 };
 typedef class Node* node;
 node makeNode(int data)
-{
+{//
 	node temp = new Node();
 	temp->value = data;
 	temp->link = NULL;
