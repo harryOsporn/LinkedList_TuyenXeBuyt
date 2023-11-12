@@ -118,15 +118,36 @@ void insertValueAtPosition(node& current, int value, int pos)
 			temp->link = newNode;
 		}
 	}
-
 }
-void loadData(node& current) {
 
+void deleteFront(node& list)
+{
+	if (list == NULL)
+		return;
+	list = list->link;
+}
+
+void deleteLast(node& list)
+{
+	if (list == NULL)
+		return;
+	node prev = NULL, next = list;
+	while (next->link != NULL)
+	{
+		prev = next;
+		next = next->link;
+	}
+	if (prev == NULL)
+		list = NULL;
+	else
+		prev->link = next->link;
+}
+
+void loadData(node& current) {
 	insertLast(current, 20);
 	insertLast(current, 30);
 	insertLast(current, 40);
 	insertLast(current, 60);
-
 }
 bool findData(node current, int x)
 {
@@ -138,18 +159,24 @@ bool findData(node current, int x)
 	}
 	return false;
 }
-void deleteNode(node& current, int x) {
-	//Tạo hàm xóa cuối và xóa đầu
 
-	node tmp = new Node();
-	for (node k = current; k != NULL; k= k->link)
+void deleteMiddle(node& list, int pos)
+{
+	if (pos < 1 || pos > size(list) + 1)
 	{
-		if (k->value == x)
-		{
-			
-		} 
-		tmp = k;
+		cout << "Invalid position.";
+		return;
 	}
+	node prev = NULL, next = list;
+	for (int i = 1; i < pos - 1; i++)
+	{
+		prev = next;
+		next = next->link;
+	}
+	if (prev == NULL)
+		list = list->link;
+	else
+		prev->link = next->link;
 }
 
 int menu()
@@ -159,16 +186,15 @@ int menu()
 
 	do
 	{
-		cout << "* * * * * \n";
-		cout << "*  MENU *\n";
-		cout << "* * * * * \n";
 		cout << "\n0. Thoat.";
 		cout << "\n1. Nhap gia tri.";
 		cout << "\n2. Them gia tri tai vi tri bat ky.";
 		cout << "\n3. Print dslk.";
 		cout << "\n4. Tim kiem Node's position bang data.";
-		cout << "\n5. Xoa 1 node chua data.";
-		cout << "\n6. Sap xep dslk theo gia tri tang dan.";
+		cout << "\n5. Xoa node dau.";
+		cout << "\n6, Xoa node cuoi.";
+		cout << "\n7. Xoa 1 node tai vi tri.";
+		cout << "\n8. Sap xep dslk theo gia tri tang dan.";
 		cout << "\n\t Chon tai day: ";
 		cin >> luaChon;
 		switch (luaChon)
@@ -176,7 +202,7 @@ int menu()
 		case 0:
 			exit(0);
 		case 1:
-			import(head);
+import(head);
 			break;
 		case 2:
 			insertValueAtPosition(head, 69, 1);
@@ -190,6 +216,15 @@ int menu()
 			if (findData(head, x) == true)
 				cout << "YES";
 			else cout << "NO";
+			break;
+		case 5:
+			deleteFront(head);
+			break;
+		case 6:
+			deleteLast(head);
+			break;
+		case 7:
+			deleteMiddle(head, 3);
 			break;
 		case 1010:
 			loadData(head);
