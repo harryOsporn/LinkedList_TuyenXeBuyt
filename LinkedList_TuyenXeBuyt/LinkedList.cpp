@@ -6,6 +6,7 @@ public:
 	Node* link;
 	int value;
 };
+
 typedef class Node* node;
 node makeNode(int data)
 {//
@@ -44,26 +45,8 @@ void pushFront(node& main, int value)
 	newNode->link = main;
 	main = newNode;
 }
-void pushBack(node& main, int value)
-{
-	node newNode = makeNode(value);
-	if (main == NULL)
-	{
-		main = newNode;
-	}
-	else
-	{
-		node last = main;
-		while (last->link != NULL)
-		{
-			last = last->link;
-		}
-		last->link = newNode;
-	}
-}
 void import(node & main)
 {
-
 	int x;
 	do
 	{
@@ -93,40 +76,32 @@ void printOutcome(node a)
 	}
 	cout << "NULL \n";
 }
-void insertValueAtPosition(node& current, int value, int pos)
-{
-	if (pos < 1 || pos > size(current))
+void insertTaiViTri(node& list, int value, int pos) {
+	node newNode = makeNode(value);
+	if (pos == 1)
 	{
-		cout << "Invalid position.";
+		newNode->link = list;
+		list = newNode;
 		return;
 	}
-	else
+	node temp = list;
+	int i = 1;
+	while (temp != NULL)
 	{
-		if (pos == 1)
-		{
-			pushFront(current, value);
-		}
-		else
-		{
-			node newNode = makeNode(value);
-			node temp = current;
-			for (int i = 1; i < pos - 1; i++)
-			{
-				temp = temp->link;
-			}
-			newNode->link = temp->link;
-			temp->link = newNode;
-		}
+		if (i == pos - 1)
+			break;
+		i++;
+		temp = temp->link;
 	}
+	newNode->link = temp->link;
+	temp->link = newNode;
 }
-
 void deleteFront(node& list)
 {
 	if (list == NULL)
 		return;
 	list = list->link;
 }
-
 void deleteLast(node& list)
 {
 	if (list == NULL)
@@ -137,16 +112,12 @@ void deleteLast(node& list)
 		prev = next;
 		next = next->link;
 	}
-	if (prev == NULL)
-		list = NULL;
-	else
-		prev->link = next->link;
+	prev->link = next->link;
 }
-
 void loadData(node& current) {
-	insertLast(current, 20);
 	insertLast(current, 30);
-	insertLast(current, 40);
+	insertLast(current, 20);
+	insertLast(current, 10);
 	insertLast(current, 60);
 }
 bool findData(node current, int x)
@@ -159,24 +130,33 @@ bool findData(node current, int x)
 	}
 	return false;
 }
-
+void sapXep(node& list) {
+	for (node p = list; p->link != NULL; p = p->link) {
+		node min = p;
+		for (node q = p->link; q != NULL; q = q->link) {
+			if (q->value < min->value)
+			{
+				min = q;
+			}
+		}
+		int temp = min->value;
+		min->value = p->value;
+		p->value = temp;
+	}
+}
 void deleteMiddle(node& list, int pos)
 {
-	if (pos < 1 || pos > size(list) + 1)
-	{
-		cout << "Invalid position.";
-		return;
+	if (pos == 1)
+		deleteFront(list);
+	else {
+		node temp = list;
+		for (int i = 1; i <= pos - 2; i++) {
+			temp = temp->link;
+		}
+		node remove = temp->link;
+		temp->link = remove->link;
+		delete remove;
 	}
-	node prev = NULL, next = list;
-	for (int i = 1; i < pos - 1; i++)
-	{
-		prev = next;
-		next = next->link;
-	}
-	if (prev == NULL)
-		list = list->link;
-	else
-		prev->link = next->link;
 }
 
 int menu()
@@ -205,7 +185,10 @@ int menu()
 import(head);
 			break;
 		case 2:
-			insertValueAtPosition(head, 69, 1);
+			int value, pos;
+			cout << "Nhap vi tri: "; cin >> pos;
+			cout << "Nhap gia tri: "; cin >> value;
+			insertTaiViTri(head, value, pos);
 			break;
 		case 3:
 			printOutcome(head);
@@ -224,7 +207,13 @@ import(head);
 			deleteLast(head);
 			break;
 		case 7:
-			deleteMiddle(head, 3);
+			int viTri;
+			cout << "Nhap vi tri can xoa: ";
+			cin >> viTri;
+			deleteMiddle(head, viTri);
+			break;
+		case 8:
+			sapXep(head);
 			break;
 		case 1010:
 			loadData(head);
