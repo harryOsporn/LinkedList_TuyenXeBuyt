@@ -155,12 +155,12 @@ void findData(xb current)
 
 void printThongTin(tuyenXeBuyt a)
 {
-	cout << "\n========================\n";
-	cout << "ID: \t\t" << a.ma << "\t||" << endl;
-	cout << "Ten: \t\t" << a.ten << "\t||" << endl;
-	cout << "Diem dau: \t" << a.diemDau << "\t||" << endl;
-	cout << "Diem cuoi: \t" << a.diemCuoi << "\t||" << endl;
-	cout << "Cu ly: \t\t" << a.cuLy << " km\t||";
+	cout << "\n========================================\n";
+	cout << "ID: \t\t" << a.ma << "\t\t\t||" << endl;
+	cout << "Ten: \t\t" << a.ten << "\t\t\t||" << endl;
+	cout << "Diem dau: \t" << a.diemDau << "\t\t\t||" << endl;
+	cout << "Diem cuoi: \t" << a.diemCuoi << "\t\t\t||" << endl;
+	cout << "Cu ly: \t\t" << a.cuLy << " km\t\t\t||";
 }
 
 void printDS(xb a) {
