@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 using namespace std;
 
@@ -16,13 +16,15 @@ public:
 typedef class xeBuyt* xb;
 
 xb makeNode()
-{//
+{
+	//cin.clear() xoa nhung thu con lai trong stream
+	//cin.ignore(32767,'\n') bỏ qua các phần từ cho đến phần tử '\n'
 	tuyenXeBuyt a;
-	cout << "Nhap thong tin: \n";
-	cout << "Nhap ma tuyen xe: "; cin >> a.ma;
-	cout << "Nhap ten tuyen xe: "; cin >> a.ten;
-	cout << "Nhap diem dau: "; cin >> a.diemDau;
-	cout << "Nhap diem cuoi: "; cin >> a.diemCuoi;
+	cout << "\n====Nhap thong tin==== \n";
+	cout << "Nhap ma tuyen xe: "; cin.ignore(32767,'\n'); getline(cin, a.ma);
+	cout << "Nhap ten tuyen xe: ";  getline(cin, a.ten);
+	cout << "Nhap diem dau: "; getline(cin, a.diemDau);
+	cout << "Nhap diem cuoi: "; getline(cin, a.diemCuoi);
 	cout << "Nhap cu ly: "; cin >> a.cuLy;
 	xb temp = new xeBuyt();
 	temp->xb = a;
@@ -70,7 +72,12 @@ void insertLast(xb& main)
 
 void insertTaiViTri(xb& list, int pos) {
 	xb newNode = makeNode();
-	if (pos == 1)
+	if (pos < 1)
+	{
+		cout << "VI TRI BAN CAN THEM KHONG HOP LE.\n";
+		return;
+	}
+	else if (pos == 1)
 	{
 		newNode->link = list;
 		list = newNode;
@@ -87,26 +94,6 @@ void insertTaiViTri(xb& list, int pos) {
 	}
 	newNode->link = temp->link;
 	temp->link = newNode;
-}
-void import(xb & list)
-{
-	tuyenXeBuyt a;
-	do
-	{
-		cout << "Nhap thong tin: \n";
-		cout << "Nhap ma tuyen xe: "; cin >> a.ma;
-		cout << "Nhap ten tuyen xe: "; cin >> a.ten;
-		cin.ignore();
-		cout << "Nhap diem dau: ";
-		getline(cin, a.diemDau);
-		cout << "Nhap diem cuoi: ";
-		getline(cin, a.diemCuoi);
-		cout << "Nhap cu ly: "; cin >> a.cuLy;
-		cout << "===========\n";
-		if (a.cuLy == -99)
-			break;
-		insertLast(list);
-	} while (true);
 }
 
 void deleteFront(xb& list)
@@ -149,36 +136,35 @@ void deleteMiddle(xb& list, int pos)
 
 void findData(xb current)
 {
-	bool flag;
+	bool flag = false;
 	string ma;
 	cout << "Nhap ma tuyen xe buyt can tim: ";
 	cin >> ma;
 	for (xb p = current; p != NULL; p = p->link)
 	{
 		if (p->xb.ma == ma)
+		{
 			flag = true;
+		}
 	}
-	flag = false;
-
-	if (flag == true)
-		cout << "Tuyen " << ma << " co ton tai.";
-	else
+	
+	if (flag == false)
 		cout << "Tuyen " << ma << " khong ton tai.";
+	else cout << "Tuyen " << ma << " co trong tuyen xe buyt.";
 }
 
 void printThongTin(tuyenXeBuyt a)
 {
-	cout << "===================\n";
-	cout << "ID: " << a.ma << endl;
-	cout << "Ten: " << a.ten << endl;
-	cout << "Diem dau: " << a.diemDau << endl;
-	cout << "Diem cuoi: " << a.diemCuoi << endl;
-	cout << "Cu ly: " << a.cuLy;
-	cout << "\n===================\n";
+	cout << "\n========================\n";
+	cout << "ID: \t\t" << a.ma << "\t||" << endl;
+	cout << "Ten: \t\t" << a.ten << "\t||" << endl;
+	cout << "Diem dau: \t" << a.diemDau << "\t||" << endl;
+	cout << "Diem cuoi: \t" << a.diemCuoi << "\t||" << endl;
+	cout << "Cu ly: \t\t" << a.cuLy << " km\t||";
 }
 
 void printDS(xb a) {
-	cout << "Danh sach tuyen xe buyt:\n";
+	cout << "\n====================DANH SACH TUYEN XE BUYT====================\n";
 
 	while (a != NULL)
 	{
@@ -209,7 +195,8 @@ int menu()
 
 	do
 	{
-		cout << "\n0. Thoat.";
+		cout << "======MENU======\n";
+		cout << "0. Thoat.";
 		cout << "\n1. Nhap gia tri.";
 		cout << "\n2. Them gia tri tai vi tri bat ky.";
 		cout << "\n3. Print tuyen xe buyt.";
