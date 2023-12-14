@@ -17,19 +17,17 @@ typedef class xeBuyt* xb;
 
 xb makeNode()
 {
-	//cin.clear() xoa nhung thu con lai trong stream
-	//cin.ignore(32767,'\n') bỏ qua các phần từ cho đến phần tử '\n'
-	tuyenXeBuyt a;
-	cout << "\n====Nhap thong tin==== \n";
-	cout << "Nhap ma tuyen xe: "; cin.ignore(32767,'\n'); getline(cin, a.ma);
-	cout << "Nhap ten tuyen xe: ";  getline(cin, a.ten);
-	cout << "Nhap diem dau: "; getline(cin, a.diemDau);
-	cout << "Nhap diem cuoi: "; getline(cin, a.diemCuoi);
-	cout << "Nhap cu ly: "; cin >> a.cuLy;
-	xb temp = new xeBuyt();
-	temp->xb = a;
-	temp->link = NULL;
-	return temp;
+		tuyenXeBuyt a;
+		cout << "\n====Nhap thong tin==== \n";
+		cout << "Nhap ma tuyen xe: "; cin.ignore(32767, '\n'); getline(cin, a.ma);
+		cout << "Nhap ten tuyen xe: ";  getline(cin, a.ten);
+		cout << "Nhap diem dau: "; getline(cin, a.diemDau);
+		cout << "Nhap diem cuoi: "; getline(cin, a.diemCuoi);
+		cout << "Nhap cu ly: "; cin >> a.cuLy;
+		xb temp = new xeBuyt();
+		temp->xb = a;
+		temp->link = NULL;
+		return temp;
 }
 
 int size(xb& a)
@@ -155,12 +153,12 @@ void findData(xb current)
 
 void printThongTin(tuyenXeBuyt a)
 {
-	cout << "\n========================================\n";
-	cout << "ID: \t\t" << a.ma << "\t\t\t||" << endl;
-	cout << "Ten: \t\t" << a.ten << "\t\t\t||" << endl;
-	cout << "Diem dau: \t" << a.diemDau << "\t\t\t||" << endl;
-	cout << "Diem cuoi: \t" << a.diemCuoi << "\t\t\t||" << endl;
-	cout << "Cu ly: \t\t" << a.cuLy << " km\t\t\t||";
+	cout << "\n================================================================\n";
+	cout << "ID: \t\t" << a.ma  << endl	;
+	cout << "Ten: \t\t" << a.ten  << endl;
+	cout << "Diem dau: \t" << a.diemDau << endl;
+	cout << "Diem cuoi: \t" << a.diemCuoi  << endl;
+	cout << "Cu ly: \t\t" << a.cuLy << " km";
 }
 
 void printDS(xb a) {
